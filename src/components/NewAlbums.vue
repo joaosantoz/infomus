@@ -1,5 +1,13 @@
 <template>
-  <div class="albums blur">
+  <div class="albums">
+    <div class="auth">
+      <p>Insira o Token Aqui</p>
+      <div class="input-token">
+        <input v-model="tokenInput" type="text" />
+        <button v-on:click="getNewAlbums(tokenInput)">ok</button>
+      </div>
+    </div>
+
     <div class="flex-cards">
       <div v-for="(album, index) in albumsArr" :key="index" class="album-card">
         <div v-bind:id="'modal-' + index" class="album-modal">
@@ -13,11 +21,75 @@
               </button>
               <div class="info-album">
                 <h1 class="title">{{ album.name }}</h1>
-                <h3>tipo: {{ album.album_type }}</h3>
-                <h3>Artistas:</h3>
-                <h3 v-for="artist in album.artists" :key="artist">
-                  {{ artist.name }}
-                </h3>
+                <h3>Tipo: {{ album.album_type }}</h3>
+                <div>
+                  <h3>Artista: {{ album.artists[0].name }}</h3>
+                  <h3>Top Tracks:</h3>
+                  <div class="wrapper">
+                    <div class="loading" v-if="!dataReady">
+                      <p>Carregando...</p>
+                    </div>
+                    <div class="track-list" v-if="dataReady">
+                      <div
+                        v-for="(track, trackIndex, trackNumber) in trackList[
+                          index
+                        ]"
+                        :key="trackNumber"
+                      >
+                        <ol v-if="dataReady">
+                          <li>
+                            {{ trackList[index].tracks[0].name }} -
+                            {{ trackList[index].tracks[0].artists[0].name }}
+                            <audio
+                              class="audio"
+                              volume="0.2"
+                              controls="controls"
+                            >
+                              <source
+                                v-bind:src="
+                                  trackList[index].tracks[0].preview_url
+                                "
+                                type="audio/mp3"
+                              />
+                            </audio>
+                          </li>
+                          <li>
+                            {{ trackList[index].tracks[1].name }} -
+                            {{ trackList[index].tracks[1].artists[0].name }}
+                            <audio
+                              class="audio"
+                              volume="0.2"
+                              controls="controls"
+                            >
+                              <source
+                                v-bind:src="
+                                  trackList[index].tracks[1].preview_url
+                                "
+                                type="audio/mp3"
+                              />
+                            </audio>
+                          </li>
+                          <li>
+                            {{ trackList[index].tracks[2].name }} -
+                            {{ trackList[index].tracks[2].artists[0].name }}
+                            <audio
+                              class="audio"
+                              volume="0.2"
+                              controls="controls"
+                            >
+                              <source
+                                v-bind:src="
+                                  trackList[index].tracks[2].preview_url
+                                "
+                                type="audio/mp3"
+                              />
+                            </audio>
+                          </li>
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -41,16 +113,21 @@ export default {
   name: "NewAlbums",
   data() {
     return {
-      token: "seu_token_aqui",
+      token: "",
       albumsArr: [],
       modalIndex: "",
       clickClass: "",
       modalIsOpen: false,
       modalOppened: "",
+      artistId: [],
+      fetchList: [],
+      trackList: [],
+      dataReady: false,
     };
   },
   methods: {
-    async getNewAlbums() {
+    async getNewAlbums(tokenInput) {
+      this.token = tokenInput;
       try {
         await fetch("https://api.spotify.com/v1/browse/new-releases?limit=50", {
           method: "GET",
@@ -61,14 +138,36 @@ export default {
           },
         }).then(async (response) => {
           var jsonResponse = await response.json();
-          this.albumsArr = jsonResponse.albums.items.reverse();
+          this.albumsArr = jsonResponse.albums.items;
           this.albumsArr.forEach((element) => {
-            console.log(element);
+            this.artistId.push({ id: element.artists[0].id });
           });
         });
       } catch (error) {
         console.log("error" + error);
       }
+    },
+    async getArtistTopTracks() {
+      this.artistId.forEach((element) => {
+        this.fetchList.push(
+          `https://api.spotify.com/v1/artists/${element.id}/top-tracks?market=US`
+        );
+      });
+      Promise.all(
+        this.fetchList.map((url) =>
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${this.token}`,
+            },
+          }).then(async (response) => {
+            this.trackList.push(await response.json());
+            console.log("");
+          })
+        )
+      );
     },
     openModal(index) {
       this.modalIndex = document.getElementById(`modal-${index}`);
@@ -88,10 +187,24 @@ export default {
     closeModal(index) {
       document.querySelector(`#modal-${index}`).classList.remove("active");
       this.modalIsOpen = false;
+      const audio = document.querySelectorAll(".audio");
+      audio.forEach((element) => {
+        console.log(element);
+        element.pause();
+        element.currentTime = 0;
+      });
+    },
+    dataIsReady() {
+      this.dataReady = true;
     },
   },
-  mounted() {
-    this.getNewAlbums();
+  async mounted() {
+    this.dataReady = false;
+    await this.getNewAlbums();
+    await this.getArtistTopTracks();
+    setTimeout(() => {
+      this.dataIsReady();
+    }, 2000);
   },
 };
 </script>
@@ -101,6 +214,20 @@ export default {
   background: #212121;
   color: #fefefe;
   padding: 50px 0;
+
+  .auth {
+    margin: 0 auto;
+    .input-token {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 100px;
+    }
+    p {
+      text-align: center;
+      color: #fefefe;
+    }
+  }
 
   .flex-cards {
     display: flex;
@@ -170,14 +297,20 @@ export default {
 
             .info-album {
               text-align: left;
-              padding: 0 100px 0 0;
+              padding: 0 50px 0 0;
 
               h1,
               h2,
               h3,
-              p {
+              p,
+              ul,
+              li {
                 color: #212121;
                 margin-left: 20px;
+              }
+
+              li {
+                margin: 10px 0;
               }
             }
 
