@@ -3,8 +3,16 @@
     <router-link to="/">Lançamentos</router-link> |
     <router-link to="/about">Top Músicas</router-link>
   </div>
+  <LoginSpotify />
   <router-view />
 </template>
+
+<script>
+import LoginSpotify from "./components/LoginSpotify";
+export default {
+  components: { LoginSpotify },
+};
+</script>
 
 <style lang="scss">
 body {

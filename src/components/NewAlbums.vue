@@ -1,13 +1,5 @@
 <template>
   <div class="albums">
-    <div class="auth">
-      <p>Insira o Token Aqui</p>
-      <div class="input-token">
-        <input v-model="value" type="text" />
-        <button v-on:click="getNewAlbums(value)">ok</button>
-      </div>
-    </div>
-
     <div class="flex-cards">
       <div v-for="(album, index) in albumsArr" :key="index" class="album-card">
         <div v-bind:id="'modal-' + index" class="album-modal">
