@@ -1,6 +1,8 @@
 <template>
   <div class="div">
-    <button v-on:click="getIdSpotify()">Login</button>
+    <a v-if="this.requestTokenUrl != ''" v-bind:href="this.requestTokenUrl"
+      >Login</a
+    >
   </div>
 </template>
 
@@ -11,42 +13,26 @@ export default {
     return {
       client_id: "a06f5d49d0b64bb3ac84bac3cec4bfff",
       client_secret: "ed6c12858f284562a88c207c8bb63f2b",
-      redirect_uri: encodeURI("http://localhost:8080"),
+      redirect_uri: "http%3A%2F%2Flocalhost%3A8080",
       login_url: "",
+      requestTokenUrl: "",
     };
   },
 
   methods: {
-    checkUrl() {
-      this.getCode();
-      this.authWithToken(this.token);
-      this.$router.push("/");
+    async checkUrl() {
+      await this.getCode();
+      await this.authWithToken(this.token);
+      if (this.userIsAuth) this.$router.push("/releases");
     },
-
-    async getIdSpotify() {
-      try {
-        await fetch(
-          `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=true`,
-          {
-            method: "GET",
-          }
-        ).then(async (response) => {
-          this.login_url = response.url;
-          window.location.href = this.login_url;
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    getCode() {
+    async getCode() {
       if (window.location.hash != "") {
         var url = window.location.hash;
         var filter = new URLSearchParams(url);
         var access_token = filter.get("#access_token");
         this.token = access_token;
 
-        this.storeNewToken(access_token);
+        await this.storeNewToken(access_token);
       }
     },
 
@@ -58,7 +44,6 @@ export default {
         }).then(async (response) => {
           var userJson = await response.json();
           this.storeNewUser(userJson);
-          console.log(this.user);
         });
       } catch (error) {
         console.log(error);
@@ -68,9 +53,11 @@ export default {
     ...mapMutations(["storeNewToken", "storeNewUser"]),
   },
   mounted() {
-    console.log();
+    this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=true`;
     this.checkUrl();
   },
-  computed: { ...mapState(["token", "user"]) },
+  computed: {
+    ...mapState(["token", "user", "userIsAuth"]),
+  },
 };
 </script>

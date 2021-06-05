@@ -1,22 +1,9 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Lançamentos</router-link> |
-    <router-link to="/about">Top Músicas</router-link>
-  </div>
-  <LoginSpotify />
-  <h3 v-if="userIsAuth">Bem-vindo(a) {{ this.user.display_name }}!</h3>
   <router-view />
 </template>
 
 <script>
-import LoginSpotify from "./components/LoginSpotify";
-import { mapState } from "vuex";
-export default {
-  components: { LoginSpotify },
-  computed: {
-    ...mapState(["userIsAuth", "user"]),
-  },
-};
+export default {};
 </script>
 
 <style lang="scss">
@@ -29,20 +16,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-  text-align: center;
-  background: #fefefe;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
