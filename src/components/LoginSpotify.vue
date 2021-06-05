@@ -13,20 +13,20 @@ export default {
       client_secret: "ed6c12858f284562a88c207c8bb63f2b",
       redirect_uri: encodeURI("http://localhost:8080"),
       login_url: "",
-      token: null,
     };
   },
 
   methods: {
     checkUrl() {
-      this.token = this.getCode();
+      this.getCode();
       this.authWithToken(this.token);
+      this.$router.push("/");
     },
 
     async getIdSpotify() {
       try {
         await fetch(
-          `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email`,
+          `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=true`,
           {
             method: "GET",
           }
@@ -48,8 +48,6 @@ export default {
 
         this.storeNewToken(access_token);
       }
-
-      return this.token;
     },
 
     async authWithToken(accessToken) {
@@ -58,19 +56,21 @@ export default {
           headers: { Authorization: "Bearer " + accessToken },
           method: "GET",
         }).then(async (response) => {
-          console.log(await response.json());
+          var userJson = await response.json();
+          this.storeNewUser(userJson);
+          console.log(this.user);
         });
       } catch (error) {
         console.log(error);
       }
     },
 
-    ...mapMutations(["storeNewToken"]),
+    ...mapMutations(["storeNewToken", "storeNewUser"]),
   },
   mounted() {
     console.log();
     this.checkUrl();
   },
-  computed: { ...mapState(["token"]) },
+  computed: { ...mapState(["token", "user"]) },
 };
 </script>

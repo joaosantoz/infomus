@@ -4,13 +4,18 @@
     <router-link to="/about">Top Músicas</router-link>
   </div>
   <LoginSpotify />
+  <h3 v-if="userIsAuth">Bem-vindo(a) {{ this.user.display_name }}!</h3>
   <router-view />
 </template>
 
 <script>
 import LoginSpotify from "./components/LoginSpotify";
+import { mapState } from "vuex";
 export default {
   components: { LoginSpotify },
+  computed: {
+    ...mapState(["userIsAuth", "user"]),
+  },
 };
 </script>
 

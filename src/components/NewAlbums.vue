@@ -101,11 +101,10 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      token: "",
       albumsArr: [],
       modalIndex: "",
       clickClass: "",
@@ -119,8 +118,7 @@ export default {
   },
 
   methods: {
-    async getNewAlbums(tokenInput) {
-      this.token = tokenInput;
+    async getNewAlbums() {
       try {
         await fetch("https://api.spotify.com/v1/browse/new-releases?limit=50", {
           method: "GET",
@@ -140,11 +138,10 @@ export default {
         console.log("error" + error);
       }
 
-      this.getArtistTopTracks(tokenInput);
+      this.getArtistTopTracks();
     },
 
-    async getArtistTopTracks(tokenInput) {
-      this.token = tokenInput;
+    async getArtistTopTracks() {
       this.artistId.forEach((element) => {
         this.fetchList.push(
           `https://api.spotify.com/v1/artists/${element.id}/top-tracks?market=US`
@@ -161,7 +158,6 @@ export default {
             },
           }).then(async (response) => {
             this.trackList.push(await response.json());
-            console.log("");
           })
         )
       );
@@ -188,7 +184,6 @@ export default {
       this.modalIsOpen = false;
       const audio = document.querySelectorAll(".audio");
       audio.forEach((element) => {
-        console.log(element);
         element.pause();
         element.currentTime = 0;
       });
@@ -197,8 +192,6 @@ export default {
     dataIsReady() {
       this.dataReady = true;
     },
-
-    ...mapMutations(["getNewToken"]),
   },
 
   async mounted() {
@@ -208,6 +201,10 @@ export default {
     setTimeout(() => {
       this.dataIsReady();
     }, 2000);
+  },
+
+  computed: {
+    ...mapState(["token"]),
   },
 };
 </script>
