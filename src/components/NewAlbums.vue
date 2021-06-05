@@ -3,8 +3,8 @@
     <div class="auth">
       <p>Insira o Token Aqui</p>
       <div class="input-token">
-        <input v-model="tokenInput" type="text" />
-        <button v-on:click="getNewAlbums(tokenInput)">ok</button>
+        <input v-model="value" type="text" />
+        <button v-on:click="getNewAlbums(value)">ok</button>
       </div>
     </div>
 
@@ -109,8 +109,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
-  name: "NewAlbums",
   data() {
     return {
       token: "",
@@ -125,6 +125,7 @@ export default {
       dataReady: false,
     };
   },
+
   methods: {
     async getNewAlbums(tokenInput) {
       this.token = tokenInput;
@@ -146,8 +147,12 @@ export default {
       } catch (error) {
         console.log("error" + error);
       }
+
+      this.getArtistTopTracks(tokenInput);
     },
-    async getArtistTopTracks() {
+
+    async getArtistTopTracks(tokenInput) {
+      this.token = tokenInput;
       this.artistId.forEach((element) => {
         this.fetchList.push(
           `https://api.spotify.com/v1/artists/${element.id}/top-tracks?market=US`
@@ -169,6 +174,7 @@ export default {
         )
       );
     },
+
     openModal(index) {
       this.modalIndex = document.getElementById(`modal-${index}`);
       if (this.modalIsOpen === true) {
@@ -184,6 +190,7 @@ export default {
         this.modalIsOpen = true;
       }
     },
+
     closeModal(index) {
       document.querySelector(`#modal-${index}`).classList.remove("active");
       this.modalIsOpen = false;
@@ -194,10 +201,14 @@ export default {
         element.currentTime = 0;
       });
     },
+
     dataIsReady() {
       this.dataReady = true;
     },
+
+    ...mapMutations(["getNewToken"]),
   },
+
   async mounted() {
     this.dataReady = false;
     await this.getNewAlbums();
