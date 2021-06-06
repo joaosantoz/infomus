@@ -22,10 +22,17 @@ export default {
 
 <style scoped lang="scss">
 #nav {
-  padding: 20px 0;
-  text-align: center;
-  background: #000000;
   position: relative;
+  background: black;
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  p {
+    color: #fefefe;
+    font-weight: bold;
+  }
 
   a {
     font-weight: bold;
@@ -37,6 +44,21 @@ export default {
   }
 }
 
+.profile-image {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 2;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   #nav {
     position: fixed;
@@ -44,20 +66,11 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    max-height: 30px;
   }
 
   .profile-image {
-    height: 50px;
-    width: 50px;
     position: fixed;
-    right: 15px;
-    top: 15px;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
   }
 }
 </style>
