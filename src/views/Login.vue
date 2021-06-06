@@ -1,5 +1,7 @@
 <template>
-  <LoginScreen />
+  <div class="login">
+    <LoginScreen />
+  </div>
 </template>
 
 <script>
@@ -11,5 +13,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.login {
+  background: url(../assets/login-bkg.jpg) no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
 </style>

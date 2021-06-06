@@ -13,10 +13,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.login-screen {
-  height: 500px;
-  width: 350px;
-  background: #212121;
-  margin: 0 auto;
-}
 </style>
