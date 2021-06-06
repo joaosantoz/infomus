@@ -1,9 +1,13 @@
 <template>
-  <div id="nav">
-    <router-link to="/releases">Lançamentos</router-link> |
-    <router-link to="/topsongs">Top Músicas</router-link>
+  <div id="nav-bar">
+    <div class="profile-image">
+      <img v-bind:src="user.images[0].url" alt="" />
+    </div>
+    <div id="nav">
+      <router-link to="/releases">Lançamentos</router-link>
+      <router-link to="/topsongs">Top Músicas</router-link>
+    </div>
   </div>
-  <p v-if="userIsAuth && user">Bem-vindo(a) {{ user.display_name }}!</p>
 </template>
 
 <script>
@@ -18,20 +22,42 @@ export default {
 
 <style scoped lang="scss">
 #nav {
-  padding: 20px;
+  padding: 20px 0;
   text-align: center;
-  background: #fefefe;
+  background: #000000;
+  position: relative;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #fefefe;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #e91e63;
     }
   }
 }
-p {
-  text-align: center;
+
+@media screen and (max-width: 768px) {
+  #nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .profile-image {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
 }
 </style>

@@ -5,7 +5,7 @@ export default createStore({
     return {
       token: "",
       userIsAuth: false,
-      user: {},
+      user: null,
     };
   },
   mutations: {

@@ -13,7 +13,7 @@ export default {
     return {
       client_id: "a06f5d49d0b64bb3ac84bac3cec4bfff",
       client_secret: "ed6c12858f284562a88c207c8bb63f2b",
-      redirect_uri: "https%3A%2F%2Finfomus.vercel.app%2F",
+      redirect_uri: "http%3A%2F%2Flocalhost%3A8080%2F",
       login_url: "",
       requestTokenUrl: "",
     };
@@ -32,7 +32,7 @@ export default {
         var access_token = filter.get("#access_token");
         this.token = access_token;
 
-        await this.storeNewToken(access_token);
+        this.storeNewToken(access_token);
       }
     },
 
@@ -53,7 +53,7 @@ export default {
     ...mapMutations(["storeNewToken", "storeNewUser"]),
   },
   mounted() {
-    this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=true`;
+    this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=false`;
     this.checkUrl();
   },
   computed: {
