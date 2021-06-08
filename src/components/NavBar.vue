@@ -1,7 +1,9 @@
 <template>
   <div id="nav-bar">
     <div class="profile-image">
-      <img v-bind:src="user.images[0].url" alt="" />
+      <router-link to="/me">
+        <img v-bind:src="user.images[0].url" alt="" />
+      </router-link>
     </div>
     <div id="nav">
       <router-link to="/releases">Lançamentos</router-link>

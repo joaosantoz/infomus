@@ -53,7 +53,8 @@ export default {
     ...mapMutations(["storeNewToken", "storeNewUser"]),
   },
   mounted() {
-    this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email&show_dialog=false`;
+    this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email%20user-top-read
+&show_dialog=false`;
     this.checkUrl();
   },
   computed: {
