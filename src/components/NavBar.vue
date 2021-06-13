@@ -2,7 +2,12 @@
   <div id="nav-bar">
     <div class="profile-image">
       <router-link to="/me">
-        <img v-bind:src="user.images[0].url" alt="" />
+        <div v-if="user.images.length != 0">
+          <img v-bind:src="user.images[0].url" alt="" />
+        </div>
+        <div v-else>
+          <img src="../assets/profile-placeholder.png" alt="" />
+        </div>
       </router-link>
     </div>
     <div id="nav">
@@ -47,8 +52,8 @@ export default {
 }
 
 .profile-image {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   position: absolute;
   right: 15px;
   top: 15px;

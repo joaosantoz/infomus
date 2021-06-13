@@ -2,7 +2,12 @@
   <NavBar />
   <div v-if="(this.topTracks && this.topArtists) != null" class="profile">
     <p>Nome: {{ user.display_name }}</p>
-    <img v-bind:src="user.images[0].url" alt="" />
+    <div v-if="user.images.length != 0">
+      <img v-bind:src="user.images[0].url" alt="" />
+    </div>
+    <div v-else>
+      <img src="../assets/profile-placeholder.png" alt="" />
+    </div>
     <p>Conta: {{ user.product }}</p>
     <p>Seguidores: {{ user.followers.total }}</p>
     <h3>Músicas mais tocadas</h3>
@@ -15,6 +20,15 @@
     <h3>Artistas mais ouvidos</h3>
     <ul v-for="(artist, index) in this.topArtists.items" :key="index">
       <li>{{ index + 1 }} - {{ artist.name }}</li>
+    </ul>
+    <h3>Minhas Playlists</h3>
+    <ul v-for="(playlist, index) in this.userPlaylists.items" :key="index">
+      <li>
+        <div>
+          <img v-bind:src="playlist.images[0].url" alt="" />
+          <p>{{ playlist.name }}</p>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -31,35 +45,53 @@ export default {
     return {
       topTracks: null,
       topArtists: null,
+      userPlaylists: null,
     };
   },
   methods: {
     async getUserTopSongs() {
-      await fetch("https://api.spotify.com/v1/me/top/tracks?limit=10", {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).then(async (response) => {
+      await fetch(
+        "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10",
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      ).then(async (response) => {
         var responseJson = await response.json();
         this.topTracks = responseJson;
         console.log(this.topSongs);
       });
     },
     async getUserTopArtists() {
-      await fetch("https://api.spotify.com/v1/me/top/artists?limit=5", {
+      await fetch(
+        "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=5",
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      ).then(async (response) => {
+        var responseJson = await response.json();
+        this.topArtists = responseJson;
+      });
+    },
+    async getUserPlaylists() {
+      await fetch("	https://api.spotify.com/v1/me/playlists", {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
       }).then(async (response) => {
         var responseJson = await response.json();
-        this.topArtists = responseJson;
-        console.log(this.topArtists);
+        this.userPlaylists = responseJson;
+        console.log(this.userPlaylists);
       });
     },
   },
   async mounted() {
     await this.getUserTopSongs();
     await this.getUserTopArtists();
+    await this.getUserPlaylists();
   },
   computed: {
     ...mapState(["user", "token"]),
