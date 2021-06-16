@@ -203,7 +203,6 @@ export default {
     setTimeout(() => {
       this.dataIsReady();
     }, 2000);
-    console.log(this.token);
   },
 
   computed: {

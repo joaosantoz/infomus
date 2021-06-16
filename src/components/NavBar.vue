@@ -2,7 +2,7 @@
   <div id="nav-bar">
     <div class="profile-image">
       <router-link to="/me">
-        <div v-if="user.images.length != 0">
+        <div v-if="user.images.length != 0 && user.images[0]">
           <img v-bind:src="user.images[0].url" alt="" />
         </div>
         <div v-else>
@@ -23,6 +23,9 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState(["userIsAuth", "user"]),
+  },
+  mounted() {
+    console.log(this.user);
   },
 };
 </script>

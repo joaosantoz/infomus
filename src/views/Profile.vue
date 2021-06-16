@@ -60,7 +60,6 @@ export default {
       ).then(async (response) => {
         var responseJson = await response.json();
         this.topTracks = responseJson;
-        console.log(this.topSongs);
       });
     },
     async getUserTopArtists() {
@@ -84,7 +83,6 @@ export default {
       }).then(async (response) => {
         var responseJson = await response.json();
         this.userPlaylists = responseJson;
-        console.log(this.userPlaylists);
       });
     },
   },
