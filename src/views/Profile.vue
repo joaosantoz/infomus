@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import NavBar from "../components/NavBar.vue";
+import NavBar from "@/components/Navbar/NavBar.vue";
 import { mapState } from "vuex";
 
 export default {

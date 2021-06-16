@@ -6,9 +6,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import NewAlbums from "@/components/NewAlbums.vue";
-import NavBar from "@/components/NavBar.vue";
+import NewAlbums from "@/components/Newsongs/NewSongs.vue";
+import NavBar from "@/components/Navbar/NavBar.vue";
 import { mapState } from "vuex";
 export default {
   name: "Home",
