@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ButtonLogin from "@/components/Buttonlogin/ButtonLogin.vue";
+import ButtonLogin from "@/components/LoginButton/LoginButton.vue";
 
 export default {
   components: { ButtonLogin },

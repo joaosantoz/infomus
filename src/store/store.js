@@ -4,17 +4,18 @@ export default createStore({
   state() {
     return {
       token: "",
-      userIsAuth: false,
       user: null,
     };
   },
   mutations: {
-    storeNewToken(state, newToken) {
+    setNewToken(state, newToken) {
       state.token = newToken;
-      state.userIsAuth = true;
     },
-    storeNewUser(state, newUser) {
+
+    setNewUser(state, newUser) {
+      console.log("called");
       state.user = newUser;
+      sessionStorage.setItem("user", JSON.stringify(newUser));
     },
   },
 });

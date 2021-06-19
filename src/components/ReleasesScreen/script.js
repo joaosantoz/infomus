@@ -1,9 +1,11 @@
 import { mapState } from "vuex";
-import AudioDemo from "../Audiodemo/AudioDemo.vue";
 
 export default {
-  components: {
-    AudioDemo,
+  beforeCreate() {
+    let userSession = sessionStorage.getItem("user");
+    if (userSession) {
+      this.$store.commit("setNewToken", userSession);
+    }
   },
   data() {
     return {
@@ -29,14 +31,14 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         }).then(async (response) => {
-          var jsonResponse = await response.json();
+          const jsonResponse = await response.json();
           this.albumsArr = jsonResponse.albums.items;
           this.albumsArr.forEach((element) => {
             this.artistId.push({ id: element.artists[0].id });
           });
         });
       } catch (error) {
-        console.log("error" + error);
+        console.log(`error${error}`);
       }
     },
 
@@ -59,11 +61,6 @@ export default {
     closeModal(index) {
       document.querySelector(`#modal-${index}`).classList.remove("active");
       this.modalIsOpen = false;
-      const audio = document.querySelectorAll(".audio");
-      audio.forEach((element) => {
-        element.pause();
-        element.currentTime = 0;
-      });
     },
   },
 
@@ -74,4 +71,6 @@ export default {
   computed: {
     ...mapState(["token", "user"]),
   },
+
+  created() {},
 };

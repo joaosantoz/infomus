@@ -1,25 +1,23 @@
 <template>
   <div class="home">
     <NavBar />
-    <NewAlbums />
+    <ReleasesScreen />
   </div>
 </template>
 
 <script>
-import NewAlbums from "@/components/Newsongs/NewSongs.vue";
-import NavBar from "@/components/Navbar/NavBar.vue";
+import ReleasesScreen from "@/components/ReleasesScreen/ReleasesScreen.vue";
+import NavBar from "@/components/NavBar/NavBar.vue";
 import { mapState } from "vuex";
+
 export default {
   name: "Home",
   components: {
-    NewAlbums,
+    ReleasesScreen,
     NavBar,
   },
   computed: {
-    ...mapState(["token", "userIsAuth"]),
-  },
-  mounted() {
-    if (!this.userIsAuth) this.$router.push("/");
+    ...mapState(["token"]),
   },
 };
 </script>

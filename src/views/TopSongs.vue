@@ -1,19 +1,21 @@
 <template>
-  <NavBar />
-  <div class="top-songs" v-if="this.trackList != null">
-    <div class="flex-track" v-for="(song, index) in trackList" :key="index">
-      <div class="track-image">
-        <img v-bind:src="song.track.album.images[0].url" alt="" />
-      </div>
-      <div class="track-name">
-        <p>{{ index + 1 }} - {{ song.track.name }}</p>
+  <div>
+    <NavBar />
+    <div class="top-songs" v-if="this.trackList != null">
+      <div class="flex-track" v-for="(song, index) in trackList" :key="index">
+        <div class="track-image">
+          <img :src="song.track.album.images[0].url" alt="" />
+        </div>
+        <div class="track-name">
+          <p>{{ index + 1 }} - {{ song.track.name }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/Navbar/NavBar.vue";
+import NavBar from "@/components/NavBar/NavBar.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -26,14 +28,14 @@ export default {
   methods: {
     async getTopSongs() {
       await fetch(
-        `https://api.spotify.com/v1/playlists/6UeSakyzhiEt4NB3UAd6NQ`,
+        "https://api.spotify.com/v1/playlists/6UeSakyzhiEt4NB3UAd6NQ",
         {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
         }
       ).then(async (response) => {
-        var responseJson = await response.json();
+        const responseJson = await response.json();
         this.trackList = responseJson.tracks.items;
       });
     },
