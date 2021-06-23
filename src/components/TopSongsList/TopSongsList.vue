@@ -1,0 +1,106 @@
+<template>
+  <div>
+    <div class="top-songs" v-if="this.trackList != null">
+      <div class="container">
+        <div class="country-select">
+          <select v-model="selected">
+            <option disabled value="">Escolha um país</option>
+            <option v-for="country in countries" :key="country">
+              {{ country.name }}
+            </option>
+          </select>
+          <button @click="updateListWithCountry(selected)">Ok</button>
+        </div>
+        <div class="flex-track" v-for="(song, index) in trackList" :key="index">
+          <div class="track-image">
+            <img :src="song.track.album.images[0].url" alt="" />
+          </div>
+          <div class="track-name">
+            <p>{{ index + 1 }} - {{ song.track.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+import json from "@/components/TopSongsList/countryPlaylists.json";
+
+export default {
+  data() {
+    return {
+      trackList: null,
+      selected: "",
+      countries: json,
+    };
+  },
+  methods: {
+    async getTopSongs(code) {
+      let urlDefault =
+        "https://api.spotify.com/v1/playlists/6UeSakyzhiEt4NB3UAd6NQ";
+      if (code) {
+        let urlUpdatePlaylist = `https://api.spotify.com/v1/playlists/${code}`;
+        urlDefault = urlUpdatePlaylist;
+      }
+
+      await fetch(urlDefault, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }).then(async (response) => {
+        const responseJson = await response.json();
+        this.trackList = responseJson.tracks.items;
+      });
+    },
+    updateListWithCountry(selected) {
+      const selectedCountry = this.countries.find(
+        (country) => country.name === selected
+      );
+      this.getTopSongs(selectedCountry.playlistCode);
+    },
+  },
+  async mounted() {
+    await this.getTopSongs();
+  },
+  computed: {
+    ...mapState(["token"]),
+  },
+};
+</script>
+
+<style lang="scss">
+.top-songs {
+  background: linear-gradient(271deg, black, #212121);
+  padding-top: 100px;
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+    .country-select {
+      display: flex;
+      color: white;
+    }
+    .flex-track {
+      display: flex;
+      flex-wrap: nowrap;
+      margin: 0px auto 10px auto;
+      background: white;
+      border-radius: 5px;
+      padding: 5px;
+      .track-image {
+        max-width: 50px;
+        margin-right: 20px;
+        img {
+          width: 100%;
+        }
+      }
+      .track-name {
+        color: black;
+      }
+    }
+  }
+}
+</style>

@@ -56,7 +56,6 @@
           height: 100%;
           width: 100%;
           overflow: hidden;
-          box-shadow: #212121 5px 5px 20px;
 
           .flex-left {
             position: absolute;
@@ -142,41 +141,6 @@
 
       p {
         text-align: center;
-      }
-
-      .image-cover {
-        overflow: hidden;
-        height: 200px;
-        width: 200px;
-
-        .album-image {
-          max-width: 200px;
-          max-height: 200px;
-          transition: 1s;
-          cursor: pointer;
-
-          &:hover {
-            transform: scale(1.1);
-            transition: 0.5s;
-          }
-        }
-      }
-
-      .album-description {
-        margin-top: 5px;
-        font-size: 14px;
-
-        .album-name {
-          margin: 0;
-          font-weight: 500;
-        }
-
-        .album-artist {
-          margin: 0px 0 0 0;
-          font-weight: 400;
-          font-size: 12px;
-          font-style: italic;
-        }
       }
     }
   }
@@ -306,41 +270,6 @@
 
         p {
           text-align: center;
-        }
-
-        .image-cover {
-          overflow: hidden;
-          height: 200px;
-          width: 200px;
-
-          .album-image {
-            max-width: 200px;
-            max-height: 200px;
-            transition: 1s;
-            cursor: pointer;
-
-            &:hover {
-              transform: scale(1.1);
-              transition: 0.5s;
-            }
-          }
-        }
-
-        .album-description {
-          margin-top: 5px;
-          font-size: 14px;
-
-          .album-name {
-            margin: 0;
-            font-weight: 500;
-          }
-
-          .album-artist {
-            margin: 0px 0 0 0;
-            font-weight: 400;
-            font-size: 12px;
-            font-style: italic;
-          }
         }
       }
     }

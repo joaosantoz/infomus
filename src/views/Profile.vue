@@ -12,18 +12,18 @@
       <p>Conta: {{ user.product }}</p>
       <p>Seguidores: {{ user.followers.total }}</p>
       <h3>Músicas mais tocadas</h3>
-      <ul v-for="(track, index) in this.topTracks.items" :key="index">
+      <ul v-for="(track, index) in this.topTracks" :key="index">
         <li>
           {{ index + 1 }} - {{ track.name }} -
           {{ track.artists[0].name }}
         </li>
       </ul>
       <h3>Artistas mais ouvidos</h3>
-      <ul v-for="(artist, index) in this.topArtists.items" :key="index">
+      <ul v-for="(artist, index) in this.topArtists" :key="index">
         <li>{{ index + 1 }} - {{ artist.name }}</li>
       </ul>
       <h3>Minhas Playlists</h3>
-      <ul v-for="(playlist, index) in this.userPlaylists.items" :key="index">
+      <ul v-for="(playlist, index) in this.userPlaylists" :key="index">
         <li>
           <div>
             <img :src="playlist.images[0].url" alt="" />
@@ -61,7 +61,7 @@ export default {
         }
       ).then(async (response) => {
         const responseJson = await response.json();
-        this.topTracks = responseJson;
+        this.topTracks = responseJson.items;
       });
     },
     async getUserTopArtists() {
@@ -74,7 +74,7 @@ export default {
         }
       ).then(async (response) => {
         const responseJson = await response.json();
-        this.topArtists = responseJson;
+        this.topArtists = responseJson.items;
       });
     },
     async getUserPlaylists() {
@@ -84,7 +84,7 @@ export default {
         },
       }).then(async (response) => {
         const responseJson = await response.json();
-        this.userPlaylists = responseJson;
+        this.userPlaylists = responseJson.items;
       });
     },
   },

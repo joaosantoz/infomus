@@ -1,12 +1,12 @@
+import axios from "axios";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      client_id: "a06f5d49d0b64bb3ac84bac3cec4bfff",
-      client_secret: "ed6c12858f284562a88c207c8bb63f2b",
+      client_id: process.env.VUE_APP_CLIENT_ID,
+      client_secret: process.env.VUE_APP_CLIENT_SECRET,
       redirect_uri: "http%3A%2F%2Flocalhost%3A8080%2F",
-      // redirect_uri: "https%3A%2F%2Finfomus.vercel.app%2F",
       login_url: "",
       requestTokenUrl: "",
     };
@@ -19,8 +19,9 @@ export default {
   methods: {
     async checkUrl() {
       await this.getCode();
-      await this.authWithToken(this.token);
+      this.authWithToken(this.token);
     },
+
     async getCode() {
       if (window.location.hash !== "") {
         const url = window.location.hash;
@@ -32,19 +33,15 @@ export default {
       }
     },
 
-    async authWithToken(accessToken) {
-      try {
-        await fetch("https://api.spotify.com/v1/me", {
+    authWithToken(accessToken) {
+      axios
+        .get("https://api.spotify.com/v1/me", {
           headers: { Authorization: `Bearer ${accessToken}` },
-          method: "GET",
-        }).then(async (response) => {
-          const userJson = await response.json();
-          this.setNewUser(userJson);
+        })
+        .then((response) => {
+          this.setNewUser(response.data);
           if (this.user) this.$router.push("/releases");
         });
-      } catch (error) {
-        console.log(error);
-      }
     },
 
     ...mapMutations(["setNewToken", "setNewUser"]),
