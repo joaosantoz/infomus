@@ -34,18 +34,16 @@ export default {
       trackList: null,
       selected: "",
       countries: json,
+      code: "6UeSakyzhiEt4NB3UAd6NQ",
     };
   },
   methods: {
-    async getTopSongs(code) {
-      let urlDefault =
-        "https://api.spotify.com/v1/playlists/6UeSakyzhiEt4NB3UAd6NQ";
-      if (code) {
-        let urlUpdatePlaylist = `https://api.spotify.com/v1/playlists/${code}`;
-        urlDefault = urlUpdatePlaylist;
+    async getTopSongs(newCode) {
+      if (newCode) {
+        this.code = newCode;
       }
 
-      await fetch(urlDefault, {
+      await fetch(`https://api.spotify.com/v1/playlists/${this.code}`, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
