@@ -1,5 +1,6 @@
 #nav-bar {
   position: relative;
+  z-index: 50;
   #nav {
     position: relative;
     background: black;
@@ -14,8 +15,10 @@
     }
 
     a {
+      font-size: 14px;
       font-weight: bold;
       color: #fefefe;
+      text-decoration: none;
 
       &.router-link-exact-active {
         color: #e91e63;
@@ -24,8 +27,8 @@
   }
 
   .profile-image {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     position: absolute;
     right: 15px;
     top: 50%;
@@ -52,6 +55,7 @@
 
     .profile-image {
       position: fixed;
+      top: 5%;
     }
   }
 }

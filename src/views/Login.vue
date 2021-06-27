@@ -14,10 +14,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.login {
-  background: url(../assets/login-bkg.jpg) no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
-</style>
+<style lang="scss"></style>

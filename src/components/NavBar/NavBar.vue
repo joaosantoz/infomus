@@ -11,6 +11,7 @@
       </router-link>
     </div>
     <div id="nav">
+      <router-link to="/home">Home</router-link>
       <router-link to="/releases">Lançamentos</router-link>
       <router-link to="/topsongs">Top Músicas</router-link>
     </div>

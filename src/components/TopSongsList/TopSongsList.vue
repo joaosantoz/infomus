@@ -68,37 +68,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.top-songs {
-  background: linear-gradient(271deg, black, #212121);
-  padding-top: 100px;
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    display: block;
-    .country-select {
-      display: flex;
-      color: white;
-    }
-    .flex-track {
-      display: flex;
-      flex-wrap: nowrap;
-      margin: 0px auto 10px auto;
-      background: white;
-      border-radius: 5px;
-      padding: 5px;
-      .track-image {
-        max-width: 50px;
-        margin-right: 20px;
-        img {
-          width: 100%;
-        }
-      }
-      .track-name {
-        color: black;
-      }
-    }
-  }
-}
-</style>
+<style src="./styles.scss" lang="scss"></style>

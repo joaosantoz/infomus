@@ -1,0 +1,36 @@
+.top-songs {
+  background: linear-gradient(271deg, black, #212121);
+  padding: 100px 10px;
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+    .country-select {
+      display: flex;
+      color: white;
+    }
+    .flex-track {
+      display: flex;
+      flex-wrap: nowrap;
+      margin: 0px auto 10px auto;
+      border-radius: 5px;
+      padding: 5px 20px 5px 0;
+      max-height: 70px;
+      align-items: center;
+      overflow: hidden;
+      background: white;
+      .track-image {
+        max-width: 90px;
+        margin-right: 20px;
+        img {
+          width: 100%;
+          display: block;
+        }
+      }
+      .track-name {
+        color: black;
+      }
+    }
+  }
+}

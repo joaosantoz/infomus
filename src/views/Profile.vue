@@ -17,4 +17,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+/deep/ .profile-image {
+  display: none;
+}
+</style>

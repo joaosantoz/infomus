@@ -1,6 +1,7 @@
 <template>
   <div class="albums">
-    <h4 class="user-name" v-if="user">Boa noite {{ user.display_name }}</h4>
+    <h4 class="user-name" v-if="user">Olá {{ user.display_name }}!</h4>
+    <h3>Lançamentos</h3>
     <div class="flex-cards">
       <div v-for="(album, index) in albumsArr" :key="index" class="album-card">
         <div class="releases-modal">
