@@ -1,9 +1,11 @@
 @mixin growCurrentTrack() {
   animation: grow 0.5s ease-in;
+
   @keyframes grow {
     from {
       right: -500px;
     }
+
     to {
       right: 0px;
     }
@@ -15,8 +17,10 @@
   position: relative;
   height: 100vh;
   widows: 100vw;
+
   .img-playback {
     overflow: hidden;
+
     .current-song-img {
       height: 100%;
       width: 100%;
@@ -26,6 +30,7 @@
       z-index: 0;
     }
   }
+
   .current-info {
     background: #e91e63;
     position: absolute;
@@ -38,11 +43,13 @@
     right: 0;
     box-shadow: 7px 7px black;
     @include growCurrentTrack();
+
     h2,
     p {
       margin: 0;
     }
   }
+
   button {
     transition: 1s;
     outline: none;
@@ -53,30 +60,34 @@
     background-color: white;
     color: black;
     cursor: pointer;
+
     &:hover {
       transition: 0.3s;
       color: #e91e63;
     }
+
     &.is-active {
       background-color: black;
       color: white;
       transition: 0.3s;
+
       &:hover {
         color: #e91e63;
         border: 2px solid black;
       }
     }
   }
-  .next-song {
+
+  .control-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    z-index: 5;
     bottom: 70px;
-    right: 50px;
-  }
-  .prev-song {
-    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 5;
-    bottom: 70px;
-    left: 50px;
   }
+
+
 }

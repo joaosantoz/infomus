@@ -1,6 +1,6 @@
 import { mapState } from "vuex";
 import ReleasesCover from "@/components/ReleasesCover/ReleasesCover.vue";
-import axios from "axios";
+import spotifyApi from "@/services/spotify.js";
 
 export default {
   components: {
@@ -12,13 +12,14 @@ export default {
       modalIndex: "",
       modalIsOpen: false,
       modalOppened: "",
+      trackListReleased: null,
     };
   },
 
   methods: {
     getNewAlbums() {
-      axios
-        .get("https://api.spotify.com/v1/browse/new-releases?limit=50", {
+      spotifyApi
+        .get("/browse/new-releases?limit=50", {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -30,7 +31,17 @@ export default {
         });
     },
 
-    openModal(index) {
+    getAlbumTrackList(id) {
+      spotifyApi
+        .get(`/albums/${id}/tracks`, {
+          headers: { Authorization: `Bearer ${this.token}` },
+        })
+        .then((response) => (this.trackListReleased = response.data.items));
+    },
+
+    openModal(index, id) {
+      this.getAlbumTrackList(id);
+
       this.modalIndex = document.getElementById(`modal-${index}`);
       if (this.modalIsOpen === true) {
         this.modalOppened = document.querySelector(
@@ -52,7 +63,7 @@ export default {
     },
   },
 
-  async mounted() {
+  mounted() {
     this.getNewAlbums();
   },
 

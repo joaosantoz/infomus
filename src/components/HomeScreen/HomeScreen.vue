@@ -16,8 +16,7 @@
         {{ this.currentSong.item.album.artists[0].name }}
       </p>
     </div>
-    <button class="next-song" @click="skipSong('next')">next</button>
-    <button class="prev-song" @click="skipSong('previous')">prev</button>
+    <HomeButtons />
   </div>
   <div v-else>
     <h1>Bem-vindo(a) ao Infomus!</h1>
@@ -26,9 +25,13 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from "axios";
+import spotifyApi from "@/services/spotify.js";
+import HomeButtons from "@/components/HomeButtons/HomeButtons.vue";
 
 export default {
+  components: {
+    HomeButtons,
+  },
   data() {
     return {
       currentSong: null,
@@ -36,34 +39,15 @@ export default {
   },
   methods: {
     getCurrentUserSong() {
-      axios
-        .get(
-          "https://api.spotify.com/v1/me/player/currently-playing?market=BR",
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          }
-        )
+      spotifyApi
+        .get("/me/player/currently-playing?market=BR", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
         .then((response) => {
           this.currentSong = response.data;
-          console.log(response.data);
         });
-    },
-
-    skipSong(direction) {
-      fetch(`https://api.spotify.com/v1/me/player/${direction}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer  ${this.token}`,
-        },
-      }).then(() => {
-        setTimeout(() => {
-          this.getCurrentUserSong();
-        }, 500);
-      });
     },
   },
   computed: {

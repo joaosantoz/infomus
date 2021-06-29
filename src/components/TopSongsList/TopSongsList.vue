@@ -26,6 +26,7 @@
 
 <script>
 import { mapState } from "vuex";
+import spotifyApi from "@/services/spotify.js";
 import json from "@/components/TopSongsList/countryPlaylists.json";
 
 export default {
@@ -43,14 +44,15 @@ export default {
         this.code = newCode;
       }
 
-      await fetch(`https://api.spotify.com/v1/playlists/${this.code}`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).then(async (response) => {
-        const responseJson = await response.json();
-        this.trackList = responseJson.tracks.items;
-      });
+      await spotifyApi
+        .get(`/playlists/${this.code}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then(async (response) => {
+          this.trackList = response.data.tracks.items;
+        });
     },
     updateListWithCountry(selected) {
       const selectedCountry = this.countries.find(

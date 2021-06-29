@@ -15,18 +15,25 @@
               </div>
               <div class="flex-right">
                 <div class="info-album">
-                  <h1 class="title">{{ album.name }}</h1>
-                  <div>
-                    <h3>Artista: {{ album.artists[0].name }}</h3>
-                    <h3>Tipo: {{ album.album_type }}</h3>
-                    <h3>Músicas em alta:</h3>
+                  <h2 class="title">{{ album.name }}</h2>
+                  <div class="description-album">
+                    <p>{{ album.artists[0].name }}</p>
+                    <p>Tipo: {{ album.album_type }}</p>
+                    <div v-if="trackListReleased" class="new-tracklist">
+                      <ul
+                        v-for="(newTrack, index) in trackListReleased"
+                        :key="index"
+                      >
+                        <li>{{ index + 1 }} - {{ newTrack.name }}</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <ReleasesCover @click="openModal(index)" :album="album" />
+        <ReleasesCover @click="openModal(index, album.id)" :album="album" />
       </div>
     </div>
   </div>
