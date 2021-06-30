@@ -16,7 +16,7 @@ export default {
 
       axios
         .get(
-          `https://api.spotify.com/v1/me/top/artists?time_range=${this.termRange}_term&limit=5`,
+          `https://api.spotify.com/v1/me/top/artists?time_range=${this.termRange}_term&limit=50`,
           {
             headers: {
               Authorization: `Bearer ${this.token}`,
