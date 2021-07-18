@@ -22,4 +22,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::-webkit-scrollbar{
+  background-color: white;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 50px;
+}
 </style>

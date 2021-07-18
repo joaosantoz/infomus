@@ -65,6 +65,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
+            animation: growModalUp 0.7s ease-in;
 
             .img-modal {
               width: 100%;
@@ -72,12 +73,15 @@
               transition: 5s;
               overflow: hidden;
               object-fit: cover;
+              animation: growImageScale 5s forwards;
+
             }
           }
 
           .flex-right {
             position: absolute;
             right: 0;
+            bottom: 0;
             max-width: 50%;
             max-height: 50vw;
             height: 100%;
@@ -85,6 +89,7 @@
             background: #fefefe;
             overflow-x: hidden;
             overflow-y: scroll;
+            animation: growModalUp 0.7s ease-in;
 
             .info-album {
               text-align: left;
@@ -117,6 +122,9 @@
             transition: 0.2s;
             cursor: pointer;
             z-index: 999;
+            opacity: 0;
+            animation: showButton 0.2s linear forwards;
+            animation-delay: 0.7s;
 
             &:hover {
               color: #212121;
@@ -154,11 +162,23 @@
 
 @keyframes growModalUp {
   from {
-    max-height: 0%;
+    max-height: 0;
   }
 
   to {
     max-height: 100%;
+  }
+}
+
+@keyframes showButton {
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes growImageScale {
+  to{
+    transform: scale(1.1);
   }
 }
 
