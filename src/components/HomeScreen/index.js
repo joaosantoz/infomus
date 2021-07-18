@@ -9,7 +9,6 @@ export default {
   data() {
     return {
       currentSong: null,
-      currentImage: null,
     };
   },
   methods: {
@@ -21,8 +20,8 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response.data)
           this.currentSong = response.data;
-          this.currentImage = response.data.item.album.images[0].url;
         });
     },
   },
@@ -32,5 +31,4 @@ export default {
   created() {
     this.getCurrentUserSong();
   },
-  mounted() {},
 };

@@ -1,12 +1,12 @@
 import axios from "axios";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
     return {
       client_id: process.env.VUE_APP_CLIENT_ID,
       client_secret: process.env.VUE_APP_CLIENT_SECRET,
-      redirect_uri: "https%3A%2F%2Finfomus.vercel.app%2F",
+      redirect_uri: "http%3A%2F%2Flocalhost%3A8080%2F",
       login_url: "",
       requestTokenUrl: "",
     };
@@ -45,7 +45,6 @@ export default {
     },
 
     ...mapMutations(["setNewToken", "setNewUser"]),
-    ...mapActions(["fetchUser"]),
   },
   async mounted() {
     this.requestTokenUrl = `https://accounts.spotify.com/authorize?client_id=${this.client_id}&response_type=token&redirect_uri=${this.redirect_uri}&scope=user-read-private%20user-read-email%20user-top-read
