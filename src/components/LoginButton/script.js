@@ -6,7 +6,7 @@ export default {
     return {
       client_id: process.env.VUE_APP_CLIENT_ID,
       client_secret: process.env.VUE_APP_CLIENT_SECRET,
-      redirect_uri: "http%3A%2F%2Flocalhost%3A8080%2F",
+      redirect_uri: "https%3A%2F%2Finfomus.vercel.app%2F",
       login_url: "",
       requestTokenUrl: "",
     };
