@@ -1,3 +1,5 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="profile-screen">
     <ProfileSongs />
@@ -5,37 +7,4 @@
   </div>
 </template>
 
-<script src="./script.js"></script>
-
-<style lang="scss" scoped>
-.profile-screen {
-  padding-bottom: 100px;
-}
-
-/deep/ {
-  button {
-    transition: 1s;
-    outline: none;
-    border: 2px solid black;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    &:hover {
-      transition: 0.3s;
-      color: #e91e63;
-    }
-    &.is-active {
-      background-color: black;
-      color: white;
-      transition: 0.3s;
-      &:hover {
-        color: #e91e63;
-        border: 2px solid black;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped>@import "ProfileScreen";</style>

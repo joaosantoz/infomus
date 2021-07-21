@@ -8,10 +8,11 @@
         class="current-song-img"
         :src="this.currentSong.item.album.images[0].url"
         alt=""
+        :style="{animationPlayState: this.getPlayingState}"
       />
     </div>
     <HomeButtons />
   </div>
 </template>
 
-<style src="./style.scss" lang="scss"></style>
+<style lang="scss">@import "HomeScreen";</style>

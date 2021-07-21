@@ -1,3 +1,5 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="album-info">
     <div class="image-cover">
@@ -10,12 +12,4 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    album: Object,
-  },
-};
-</script>
-
-<style src="./style.scss" lang="scss"></style>
+<style lang="scss">@import "ReleasesCover";</style>

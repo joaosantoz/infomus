@@ -1,6 +1,8 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="albums">
-    <h4 class="user-name" v-if="user">Olá {{ user.display_name }}!</h4>
+    <h4 class="user-name" v-if="userName">Olá {{ userName }}!</h4>
     <h3>Lançamentos</h3>
     <div class="flex-cards">
       <div v-for="(album, index) in albumsArr" :key="index" class="album-card">
@@ -11,7 +13,7 @@
                 x
               </button>
               <div class="flex-left">
-                <img class="img-modal" :src="album.images[0].url" alt="" />
+                <img @click="openAlbumLink(album)" class="img-modal" :src="album.images[0].url" alt="" />
               </div>
               <div class="flex-right">
                 <div class="info-album">
@@ -39,5 +41,4 @@
   </div>
 </template>
 
-<script src="./script.js"></script>
-<style src="./style.scss" lang="scss" scoped></style>
+<style lang="scss" scoped>@import "ReleasesScreen";</style>

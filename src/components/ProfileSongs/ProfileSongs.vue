@@ -1,3 +1,5 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="profile-songs">
     <h3>Músicas mais tocadas</h3>
@@ -18,7 +20,5 @@
     </ul>
   </div>
 </template>
-
-<script src="./script.js"></script>
 
 <style lang="scss"></style>

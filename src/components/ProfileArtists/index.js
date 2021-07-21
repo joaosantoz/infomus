@@ -1,4 +1,4 @@
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
@@ -19,7 +19,7 @@ export default {
           `https://api.spotify.com/v1/me/top/artists?time_range=${this.termRange}_term&limit=50`,
           {
             headers: {
-              Authorization: `Bearer ${this.token}`,
+              Authorization: `Bearer ${this.getUserToken}`,
             },
           }
         )
@@ -42,6 +42,6 @@ export default {
     await this.getUserTopArtists();
   },
   computed: {
-    ...mapState(["user", "token"]),
+    ...mapGetters(["getUserToken"]),
   },
 };

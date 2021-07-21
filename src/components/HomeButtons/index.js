@@ -1,4 +1,4 @@
-import { mapState } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import spotifyApi from "../../services/spotify";
 
 export default {
@@ -14,7 +14,7 @@ export default {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer  ${this.token}`,
+            Authorization: `Bearer  ${this.getUserToken}`,
           },
         })
         .then(() => {
@@ -28,7 +28,7 @@ export default {
       spotifyApi
         .put(`/me/player/${option}`, null, {
           headers: {
-            Authorization: `Bearer ${this.token}`,
+            Authorization: `Bearer ${this.getUserToken}`,
           },
         })
         .then(() => {
@@ -36,10 +36,13 @@ export default {
             this.$parent.getCurrentUserSong();
           }, 500);
         });
+
       this.isPlaying = !this.isPlaying;
+      this.alternatePlayingState();
     },
+    ...mapMutations(["alternatePlayingState"]),
   },
   computed: {
-    ...mapState(["token", "user"]),
+    ...mapGetters(["getUserToken"]),
   },
 };

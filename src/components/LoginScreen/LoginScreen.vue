@@ -1,15 +1,17 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="login-screen">
     <ButtonLogin />
   </div>
 </template>
 
-<script>
-import ButtonLogin from "@/components/LoginButton/LoginButton.vue";
+<style lang="scss">
+.login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-export default {
-  components: { ButtonLogin },
-};
-</script>
-
-<style scoped lang="scss"></style>
+</style>

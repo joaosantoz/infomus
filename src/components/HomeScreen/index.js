@@ -1,6 +1,6 @@
-import { mapState } from "vuex";
-import spotifyApi from "@/services/spotify.js";
-import HomeButtons from "@/components/HomeButtons/HomeButtons.vue";
+import { mapGetters } from "vuex";
+import spotifyApi from "../../services/spotify.js";
+import HomeButtons from "../HomeButtons/HomeButtons.vue";
 
 export default {
   components: {
@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       currentSong: null,
+      discObject: null,
     };
   },
   methods: {
@@ -16,18 +17,19 @@ export default {
       spotifyApi
         .get("/me/player/currently-playing?market=BR", {
           headers: {
-            Authorization: `Bearer ${this.token}`,
+            Authorization: `Bearer ${this.getUserToken}`,
           },
         })
         .then((response) => {
-          console.log(response.data)
           this.currentSong = response.data;
         });
     },
   },
+
   computed: {
-    ...mapState(["token", "user"]),
+    ...mapGetters(["getUserToken", "getPlayingState"]),
   },
+
   created() {
     this.getCurrentUserSong();
   },

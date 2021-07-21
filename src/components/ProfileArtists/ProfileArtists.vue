@@ -1,3 +1,5 @@
+<script src="./index.js"></script>
+
 <template>
   <div class="profile-artists">
     <h3>Artistas mais ouvidos</h3>
@@ -18,7 +20,5 @@
     </ul>
   </div>
 </template>
-
-<script src="./script.js"></script>
 
 <style></style>

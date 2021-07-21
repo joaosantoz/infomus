@@ -1,6 +1,6 @@
 .albums {
-  background: linear-gradient(271deg, black, #212121);
-  color: #fefefe;
+  background: linear-gradient(0deg, black, #191414);
+  color: #ffffff;
   padding: 50px 0;
 
   .auth {
@@ -15,7 +15,7 @@
 
     p {
       text-align: center;
-      color: #fefefe;
+      color: #ffffff;
     }
   }
 
@@ -73,7 +73,11 @@
               transition: 5s;
               overflow: hidden;
               object-fit: cover;
-              animation: growImageScale 5s forwards;
+              cursor: pointer;
+
+              &:hover {
+                animation: growImageScale 5s forwards;
+              }
 
             }
           }
@@ -86,7 +90,7 @@
             max-height: 50vw;
             height: 100%;
             width: 100%;
-            background: #fefefe;
+            background: #ffffff;
             overflow-x: hidden;
             overflow-y: scroll;
             animation: growModalUp 0.7s ease-in;
@@ -115,7 +119,7 @@
             outline: none;
             border: 2px solid white;
             background: #212121;
-            color: #fefefe;
+            color: #ffffff;
             border-radius: 0;
             height: 30px;
             width: 30px;
@@ -128,7 +132,7 @@
 
             &:hover {
               color: #212121;
-              background: #fefefe;
+              background: #ffffff;
               border: 1px solid #212121;
               transition: 0.2s;
             }
@@ -248,7 +252,7 @@
               max-height: 0;
               height: 100%;
               width: 100%;
-              background: #fefefe;
+              background: #ffffff;
               overflow-y: scroll;
               overflow-x: hidden;
               animation: growModalUp 1s linear forwards;

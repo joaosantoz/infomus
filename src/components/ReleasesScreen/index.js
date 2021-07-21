@@ -1,6 +1,6 @@
-import { mapState } from "vuex";
-import ReleasesCover from "@/components/ReleasesCover/ReleasesCover.vue";
-import spotifyApi from "@/services/spotify.js";
+import { mapGetters } from "vuex";
+import ReleasesCover from "../ReleasesCover/ReleasesCover.vue";
+import spotifyApi from "../../services/spotify.js";
 
 export default {
   components: {
@@ -11,8 +11,9 @@ export default {
       albumsArr: [],
       modalIndex: "",
       modalIsOpen: false,
-      modalOppened: "",
+      modalOpened: "",
       trackListReleased: null,
+      userName: null,
     };
   },
 
@@ -23,7 +24,7 @@ export default {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${this.token}`,
+            Authorization: `Bearer ${this.getUserToken}`,
           },
         })
         .then((response) => {
@@ -34,7 +35,7 @@ export default {
     getAlbumTrackList(id) {
       spotifyApi
         .get(`/albums/${id}/tracks`, {
-          headers: { Authorization: `Bearer ${this.token}` },
+          headers: { Authorization: `Bearer ${this.getUserToken}` },
         })
         .then((response) => (this.trackListReleased = response.data.items));
     },
@@ -44,10 +45,10 @@ export default {
 
       this.modalIndex = document.getElementById(`modal-${index}`);
       if (this.modalIsOpen === true) {
-        this.modalOppened = document.querySelector(
+        this.modalOpened = document.querySelector(
           ".album-modal.active"
         ).attributes.id.nodeValue;
-        document.getElementById(this.modalOppened).classList.remove("active");
+        document.getElementById(this.modalOpened).classList.remove("active");
         this.modalIsOpen = false;
       }
 
@@ -61,13 +62,18 @@ export default {
       document.querySelector(`#modal-${index}`).classList.remove("active");
       this.modalIsOpen = false;
     },
+
+    openAlbumLink(albumInfo) {
+      window.open(albumInfo.external_urls.spotify);
+    },
   },
 
-  mounted() {
+  created() {
     this.getNewAlbums();
+    this.userName = this.getUserName;
   },
 
   computed: {
-    ...mapState(["token", "user"]),
+    ...mapGetters(["getUserToken", "getUserName"]),
   },
 };
