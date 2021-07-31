@@ -20,7 +20,7 @@ export default {
         .then(() => {
           setTimeout(() => {
             this.$parent.getCurrentUserSong();
-          }, 500);
+          }, 100);
         });
     },
 
@@ -34,7 +34,7 @@ export default {
         .then(() => {
           setTimeout(() => {
             this.$parent.getCurrentUserSong();
-          }, 500);
+          }, 100);
         });
 
       this.isPlaying = !this.isPlaying;

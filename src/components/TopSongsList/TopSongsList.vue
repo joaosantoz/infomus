@@ -13,7 +13,7 @@
           </select>
           <button @click="updateListWithCountry(selected)">Ok</button>
         </div>
-        <div class="flex-track" v-for="(song, index) in trackList" :key="index">
+        <div @click="openSongInSpotify(song)" class="flex-track" v-for="(song, index) in trackList" :key="index">
           <div class="track-image">
             <img :src="song.track.album.images[0].url" alt="" />
           </div>
