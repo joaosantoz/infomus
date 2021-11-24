@@ -4,12 +4,8 @@
   <div id="nav-bar">
     <div class="profile-image">
       <router-link to="/me">
-        <div v-if="user">
-          <img :src="user.images[0].url" alt="" />
-        </div>
-        <div v-else>
-          <img src="../../assets/profile-placeholder.png" alt="" />
-        </div>
+          <img v-if="getUserPicture" :src="getUserPicture" alt="" />
+          <img v-else src="../../assets/profile-placeholder.png" alt="" />
       </router-link>
     </div>
     <div id="nav">

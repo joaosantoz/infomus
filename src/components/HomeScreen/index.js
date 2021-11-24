@@ -27,7 +27,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getUserToken", "getPlayingState"]),
+    ...mapGetters(["getUserToken", "getPlayingState", "getFullUser"]),
   },
 
   created() {

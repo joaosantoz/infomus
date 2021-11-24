@@ -33,6 +33,10 @@ export default {
       );
       this.getTopSongs(selectedCountry.playlistCode);
     },
+
+    openSongInSpotify(song) {
+      window.open(song.track.external_urls.spotify);
+    },
   },
   created() {
     this.getTopSongs();
