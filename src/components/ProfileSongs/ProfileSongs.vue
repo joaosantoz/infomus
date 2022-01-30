@@ -1,4 +1,57 @@
-<script src="./index.js"></script>
+<script>
+import { mapState } from "pinia";
+import axios from "axios";
+import { useStatsStore } from "../../stores";
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const topTracks = ref(null);
+    const termRange = ref("medium");
+    return {
+      topTracks,
+      termRange,
+    };
+  },
+  methods: {
+    getUserTopSongs(range) {
+      if (range) {
+        this.termRange = range;
+      }
+
+      axios
+        .get(
+          `https://api.spotify.com/v1/me/top/tracks?time_range=${this.termRange}_term&limit=50`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.getUserToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          this.topTracks = response.data.items;
+        });
+    },
+
+    refreshSongs(range, clickEvent) {
+      this.getUserTopSongs(range);
+      let otherButtons = document.getElementsByClassName("btn-songs");
+      [...otherButtons].forEach((element) => {
+        if (element.classList.contains("is-active"))
+          element.classList.remove("is-active");
+      });
+      clickEvent.target.classList.add("is-active");
+    },
+  },
+  async mounted() {
+    await this.getUserTopSongs();
+  },
+  computed: {
+    ...mapState(useStatsStore, ["getUserToken"]),
+  },
+};
+
+</script>
 
 <template>
   <div class="profile-songs">
@@ -21,4 +74,29 @@
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+  button {
+    transition: 1s;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 0;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    &:hover {
+      transition: 0.3s;
+      color: #e91e63;
+    }
+    &.is-active {
+      background-color: black;
+      color: white;
+      transition: 0.3s;
+      &:hover {
+        color: #e91e63;
+        border: 2px solid black;
+      }
+    }
+  }
+</style>

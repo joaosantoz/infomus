@@ -1,4 +1,14 @@
-<script src="./index.js"></script>
+<script>
+import { mapState } from "pinia";
+import { useStatsStore } from "../../stores";
+
+export default {
+  computed: {
+    ...mapState(useStatsStore, ["getUserPicture"]),
+  },
+};
+
+</script>
 
 <template>
   <div id="nav-bar">

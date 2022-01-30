@@ -1,4 +1,11 @@
-<script src="./index.js"></script>
+<script>
+export default {
+  props: {
+    album: Object,
+  },
+};
+
+</script>
 
 <template>
   <div class="album-info">
