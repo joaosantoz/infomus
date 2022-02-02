@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.4.1",
     "pinia": "^2.0.9",
     "pinia-plugin-persistedstate-2": "^0.2.8",
     "vue": "^3.2.27",

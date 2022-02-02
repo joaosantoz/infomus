@@ -81,10 +81,11 @@ export default {
   created() {
     this.getNewAlbums();
     this.userName = this.getUserName;
+    console.log(this.getUserName)
   },
 
   computed: {
-    ...mapState(useStatsStore, ["getUserToken", "getUserName"]),
+    ...mapState(useStatsStore, ["getUserToken", "getUserName", "getFullUser"]),
   },
 };
 

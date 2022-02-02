@@ -1,5 +1,3 @@
-import spotifyApi from "../services/spotify";
-
 const actions = {
 	alternatePlayingState() {
 		this.isPlaying = !this.isPlaying;
@@ -11,14 +9,8 @@ const actions = {
 
 		this.token = accessToken;
 	},
-	setNewUser(token) {
-		spotifyApi
-			.get("/me", {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-			.then((response) => {
-				this.user = response.data;
-			});
+	setNewUser(user) {
+		this.user = user;
 	},
 }
 
