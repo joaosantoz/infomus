@@ -1,12 +1,6 @@
 import spotifyApi from "../services/spotify";
 
 const actions = {
-	// setToken(newToken) {
-	// 	this.token = newToken;
-	// },
-	// setUser(newUser) {
-	// 	this.user = newUser;
-	// },
 	alternatePlayingState() {
 		this.isPlaying = !this.isPlaying;
 	},

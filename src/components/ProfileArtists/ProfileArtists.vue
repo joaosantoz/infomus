@@ -31,6 +31,7 @@ export default {
         )
         .then((response) => {
           this.topArtists = response.data.items;
+          console.log(this.topArtists)
         });
     },
 
@@ -61,34 +62,56 @@ export default {
     <button class="btn-artists is-active" @click="refreshArtists('medium', $event)">6 Meses</button>
     <button class="btn-artists" @click="refreshArtists('long', $event)">Um ano</button>
     <ul v-for="(artist, index) in this.topArtists" :key="index">
-      <li>{{ index + 1 }} - {{ artist.name }}</li>
+      <li class="artist">
+        <span>{{ index + 1 }}</span>
+        <img class="cover" :src="artist.images[2].url" alt />
+        <span>{{ artist.name }}</span>
+      </li>
     </ul>
   </div>
 </template>
 
 <style lang="scss">
-  button {
-    transition: 1s;
-    outline: none;
-    border: 2px solid black;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
+.artist {
+  max-width: 800px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50px 100px 400px 200px;
+  align-items: center;
+  gap: 0 20px;
+  padding: 10px 0 10px 40px;
+  background: linear-gradient(270deg, rgba(224, 234, 252, 0.3), rgba(207, 222, 243, 0.3));
+  border-radius: 16px;
+
+  .cover {
+    height: 64px;
+    width: 64px;
+    border-radius: 16px;
+  }
+}
+
+.btn-artists {
+  transition: 1s;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 0;
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    transition: 0.3s;
+    color: #e91e63;
+  }
+  &.is-active {
+    background-color: black;
+    color: white;
+    transition: 0.3s;
     &:hover {
-      transition: 0.3s;
       color: #e91e63;
-    }
-    &.is-active {
-      background-color: black;
-      color: white;
-      transition: 0.3s;
-      &:hover {
-        color: #e91e63;
-        border: 2px solid black;
-      }
+      border: 2px solid black;
     }
   }
+}
 </style>

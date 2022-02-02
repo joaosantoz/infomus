@@ -5,8 +5,8 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    const client_id = "a06f5d49d0b64bb3ac84bac3cec4bfff";
-    const client_secret = "ed6c12858f284562a88c207c8bb63f2b";
+    const client_id = import.meta.env.VITE_APP_CLIENT_ID;
+    const client_secret = import.meta.env.VITE_APP_CLIENT_SECRET;
     const redirect_uri = ref("");
     const login_url = ref("");
     const requestTokenUrl = ref("");

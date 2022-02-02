@@ -6,32 +6,32 @@ const router = createRouter({
     {
       path: "/",
       name: "Login",
-      component: () => import("../views/Login.vue"),
+      component: () => import("../views/LoginPage.vue"),
     },
     {
       path: "/home",
       name: "Home",
-      component: () => import("../views/Home.vue"),
+      component: () => import("../views/HomePage.vue"),
     },
     {
       path: "/releases",
       name: "Releases",
-      component: () => import("../views/Releases.vue"),
+      component: () => import("../views/ReleasesPage.vue"),
     },
     {
       path: "/topsongs",
       name: "TopSongs",
-      component: () => import("../views/TopSongs.vue"),
+      component: () => import("../views/TopSongsPage.vue"),
     },
     {
       path: "/me",
       name: "Profile",
-      component: () => import("../views/Profile.vue"),
+      component: () => import("../views/ProfilePage.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "notfound",
-      component: () => import("../views/NotFound.vue"),
+      component: () => import("../views/NotFoundPage.vue"),
     },
   ]
 })

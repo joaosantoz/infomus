@@ -56,18 +56,19 @@ export default {
 <template>
   <div class="profile-songs">
     <h3>Músicas mais tocadas</h3>
-    <button class="btn-songs" @click="refreshSongs('short', $event)">
-      Este Mês
-    </button>
-    <button class="btn-songs is-active" @click="refreshSongs('medium', $event)">
-      6 Meses
-    </button>
-    <button class="btn-songs" @click="refreshSongs('long', $event)">
-      Um ano
-    </button>
+    <button class="btn-songs" @click="refreshSongs('short', $event)">Este Mês</button>
+    <button class="btn-songs is-active" @click="refreshSongs('medium', $event)">6 Meses</button>
+    <button class="btn-songs" @click="refreshSongs('long', $event)">Um ano</button>
     <ul v-for="(track, index) in this.topTracks" :key="index">
-      <li>
-        {{ index + 1 }} - {{ track.name }} -
+      <li class="track">
+        <span>{{ index + 1 }}</span>
+        <div class="info">
+          <img class="cover" :src="track.album.images[2].url" alt />
+          <audio controls>
+            <source :src="track.preview_url" />
+          </audio>
+        </div>
+        <span>{{ track.name }}</span>
         {{ track.artists[0].name }}
       </li>
     </ul>
@@ -75,28 +76,56 @@ export default {
 </template>
 
 <style lang="scss">
-  button {
-    transition: 1s;
-    outline: none;
-    border: 2px solid black;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    &:hover {
-      transition: 0.3s;
-      color: #e91e63;
+.track {
+  max-width: 800px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50px 100px 400px 200px;
+  align-items: center;
+  gap: 0 20px;
+  padding: 10px 0 10px 40px;
+  background: linear-gradient(
+    270deg,
+    rgba(224, 234, 252, 0.3),
+    rgba(207, 222, 243, 0.3)
+  );
+  border-radius: 16px;
+
+  .info {
+    audio {
+      display: none;
     }
-    &.is-active {
-      background-color: black;
-      color: white;
-      transition: 0.3s;
-      &:hover {
-        color: #e91e63;
-        border: 2px solid black;
-      }
+
+    .cover {
+      height: 64px;
+      width: 64px;
+      border-radius: 16px;
     }
   }
+}
+
+.btn-songs {
+  transition: 1s;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 0;
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    transition: 0.3s;
+    color: #e91e63;
+  }
+  &.is-active {
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+    &:hover {
+      color: #e91e63;
+      border: 2px solid black;
+    }
+  }
+}
 </style>
