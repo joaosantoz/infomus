@@ -1,11 +1,16 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import router from "./router";
-import store from "./store";
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
-const app = createApp(App);
+import App from './App.vue'
+import router from './router'
+import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2'
 
-app.use(router).use(store);
+const app = createApp(App)
 
-app.mount("#app");
+const pinia = createPinia();
+pinia.use(createPersistedStatePlugin());
+
+app.use(pinia)
+app.use(router)
+
+app.mount('#app')

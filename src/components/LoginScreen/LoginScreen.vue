@@ -1,4 +1,10 @@
-<script src="./index.js"></script>
+<script>
+import ButtonLogin from "@/components/LoginButton/LoginButton.vue";
+
+export default {
+  components: { ButtonLogin },
+};
+</script>
 
 <template>
   <div class="login-screen">

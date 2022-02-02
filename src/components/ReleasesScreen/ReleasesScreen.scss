@@ -48,7 +48,7 @@
         top: 50%;
         transform: translateY(-50%);
         display: none;
-        transition: 1s;
+        transition: 0.2s;
 
         .flex-modal {
           display: flex;
@@ -60,12 +60,13 @@
           .flex-left {
             position: absolute;
             left: 0;
+            bottom: 0;
             max-width: 50%;
             max-height: 50vw;
             height: 100%;
             width: 100%;
             overflow: hidden;
-            animation: growModalUp 0.7s ease-in;
+            animation: growModalUp 0.3s ease-in;
 
             .img-modal {
               width: 100%;
@@ -93,7 +94,7 @@
             background: #ffffff;
             overflow-x: hidden;
             overflow-y: scroll;
-            animation: growModalUp 0.7s ease-in;
+            animation: growModalUp 0.3s ease-in;
 
             .info-album {
               text-align: left;
@@ -128,7 +129,7 @@
             z-index: 999;
             opacity: 0;
             animation: showButton 0.2s linear forwards;
-            animation-delay: 0.7s;
+            animation-delay: 0.3s;
 
             &:hover {
               color: #212121;

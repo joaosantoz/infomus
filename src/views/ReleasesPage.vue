@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="ReleasesPage">
     <NavBar />
     <ReleasesScreen />
   </div>
@@ -10,7 +10,7 @@ import ReleasesScreen from "@/components/ReleasesScreen/ReleasesScreen.vue";
 import NavBar from "@/components/NavBar/NavBar.vue";
 
 export default {
-  name: "Home",
+  name: "ReleasesPage",
   components: {
     ReleasesScreen,
     NavBar,
