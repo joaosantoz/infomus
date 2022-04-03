@@ -116,7 +116,7 @@ export default {
                         v-for="(newTrack, index) in trackListReleased"
                         :key="index"
                       >
-                        <li>{{ index + 1 }} - {{ newTrack.name }}</li>
+                        <li>{{ index + 1 }}. {{ newTrack.name }}</li>
                       </ul>
                     </div>
                   </div>

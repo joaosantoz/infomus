@@ -1,5 +1,5 @@
 .albums {
-  background: linear-gradient(0deg, black, #191414);
+  background: #060606;
   color: #ffffff;
   padding: 50px 0;
 
@@ -97,18 +97,28 @@
             animation: growModalUp 0.3s ease-in;
 
             .info-album {
+              margin-left: 20px;
               text-align: left;
               padding: 0 50px 0 0;
               color: black;
 
-              .description-album p {
-                text-align: left;
-                font-weight: 500;
-
+              .description-album {
+                .new-tracklist {
+                  margin-top: 30px;
+                }
+                p {
+                  text-align: left;
+                  font-weight: 500;
+                }
               }
 
-              li {
-                margin: 10px 0;
+              ul {
+                padding: 0;
+
+                li {
+                  margin: 10px 0;
+                  list-style-type: none;
+                }
               }
             }
           }
@@ -157,7 +167,7 @@
   }
 
   .user-name {
-    margin-left: 30px;
+    margin-left: 85px;
   }
 
   h3 {
@@ -176,13 +186,13 @@
 }
 
 @keyframes showButton {
-  to{
+  to {
     opacity: 1;
   }
 }
 
 @keyframes growImageScale {
-  to{
+  to {
     transform: scale(1.1);
   }
 }
@@ -261,7 +271,9 @@
               .info-album {
                 text-align: left;
                 padding: 0 50px 0 0;
-                .title, .description-album {
+
+                .title,
+                .description-album {
                   margin-left: 14px;
                 }
               }

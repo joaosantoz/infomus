@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss">
 .wip.profile {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 </style>

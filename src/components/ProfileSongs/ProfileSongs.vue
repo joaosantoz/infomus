@@ -55,45 +55,60 @@ export default {
 
 <template>
   <div class="profile-songs">
-    <h3>Músicas mais tocadas</h3>
-    <button class="btn-songs" @click="refreshSongs('short', $event)">Este Mês</button>
-    <button class="btn-songs is-active" @click="refreshSongs('medium', $event)">6 Meses</button>
-    <button class="btn-songs" @click="refreshSongs('long', $event)">Um ano</button>
+    <header class="songs-header">
+      <h3>Músicas mais tocadas</h3>
+      <div class="controls">
+        <button class="btn-songs" @click="refreshSongs('short', $event)">Este Mês</button>
+        <button class="btn-songs is-active" @click="refreshSongs('medium', $event)">6 Meses</button>
+        <button class="btn-songs" @click="refreshSongs('long', $event)">Um ano</button>
+      </div>
+    </header>
     <ul v-for="(track, index) in this.topTracks" :key="index">
       <li class="track">
         <span>{{ index + 1 }}</span>
-        <div class="info">
-          <img class="cover" :src="track.album.images[2].url" alt />
-          <audio controls>
-            <source :src="track.preview_url" />
-          </audio>
-        </div>
+        <img class="cover" :src="track.album.images[2].url" alt />
         <span>{{ track.name }}</span>
-        {{ track.artists[0].name }}
+        <span>{{ track.artists[0].name }}</span>
       </li>
     </ul>
   </div>
 </template>
 
-<style lang="scss">
-.track {
-  max-width: 800px;
+<style lang="scss" scoped>
+.profile-songs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+header.songs-header {
+  max-width: 740px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 50px 100px 400px 200px;
-  align-items: center;
-  gap: 0 20px;
-  padding: 10px 0 10px 40px;
-  background: linear-gradient(
-    270deg,
-    rgba(224, 234, 252, 0.3),
-    rgba(207, 222, 243, 0.3)
-  );
-  border-radius: 16px;
+  .controls {
+    max-width: 740px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
 
-  .info {
-    audio {
-      display: none;
+ul {
+  padding: 0;
+  .track {
+    max-width: 740px;
+    width: 100%;
+    display: grid;
+    max-height: 84px;
+    overflow-y: hidden;
+    grid-template-columns: 80px 150px 300px 170px;
+    align-items: center;
+    gap: 0;
+    padding: 10px 0 10px 40px;
+    background: #fff;
+    font-weight: 500;
+    border-radius: 16px;
+
+    span {
+      word-wrap: break-word;
     }
 
     .cover {
@@ -107,24 +122,25 @@ export default {
 .btn-songs {
   transition: 1s;
   outline: none;
-  border: 2px solid black;
-  border-radius: 0;
-  padding: 10px 20px;
-  margin: 0 10px;
-  background-color: white;
-  color: black;
+  border: none;
+  padding: 10px 90px;
+  margin: 0;
+  background-color: #fff;
+  color: #060606;
   cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+
   &:hover {
     transition: 0.3s;
-    color: #e91e63;
+    color: #060606;
   }
   &.is-active {
-    background-color: black;
-    color: white;
+    background-color: #e91e63;
+    color: #fff;
     transition: 0.3s;
     &:hover {
-      color: #e91e63;
-      border: 2px solid black;
+      color: #060606;
     }
   }
 }
