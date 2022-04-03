@@ -1,5 +1,6 @@
 <template>
   <RouterView />
+  <span class="wip">WORK IN PROGRESS</span>
 </template>
 
 <style>
@@ -29,5 +30,17 @@ body {
   background-color: black;
   border: 2px solid white;
   border-radius: 50px;
+}
+
+.wip {
+  position: fixed;
+  right: 2%;
+  top: 96%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  font-style: italic;
+  z-index: 999;
 }
 </style>

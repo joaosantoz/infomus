@@ -60,15 +60,6 @@ export default {
   <div>
     <div class="top-songs" v-if="this.trackList != null">
       <div class="container">
-        <div class="country-select">
-          <select v-model="selected">
-            <option disabled value="">Escolha um país</option>
-            <option v-for="country in countries" :key="country">
-              {{ country.name }}
-            </option>
-          </select>
-          <button @click="updateListWithCountry(selected)">Ok</button>
-        </div>
         <div @click="openSongInSpotify(song)" class="flex-track" v-for="(song, index) in trackList" :key="index">
           <div class="track-image">
             <img :src="song.track.album.images[0].url" alt="" />

@@ -1,10 +1,3 @@
-<template>
-  <div class="ReleasesPage">
-    <NavBar />
-    <ReleasesScreen />
-  </div>
-</template>
-
 <script>
 import ReleasesScreen from "@/components/ReleasesScreen/ReleasesScreen.vue";
 import NavBar from "@/components/NavBar/NavBar.vue";
@@ -17,3 +10,10 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div class="ReleasesPage">
+    <NavBar />
+    <ReleasesScreen />
+  </div>
+</template>

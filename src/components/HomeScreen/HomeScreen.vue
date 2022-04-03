@@ -58,4 +58,4 @@ export default {
   </div>
 </template>
 
-<style lang="scss">@import "HomeScreen";</style>
+<style lang="scss">@import './HomeScreen.scss'</style>

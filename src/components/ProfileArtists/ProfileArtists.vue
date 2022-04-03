@@ -31,7 +31,6 @@ export default {
         )
         .then((response) => {
           this.topArtists = response.data.items;
-          console.log(this.topArtists)
         });
     },
 
