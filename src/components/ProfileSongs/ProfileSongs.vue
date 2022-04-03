@@ -30,6 +30,7 @@ export default {
         )
         .then((response) => {
           this.topTracks = response.data.items;
+          console.log(response.data.items)
         });
     },
 
@@ -41,6 +42,9 @@ export default {
           element.classList.remove("is-active");
       });
       clickEvent.target.classList.add("is-active");
+    },
+    openTrack(track) {
+      window.open(track.external_urls.spotify);
     },
   },
   async mounted() {
@@ -63,7 +67,7 @@ export default {
         <button class="btn-songs" @click="refreshSongs('long', $event)">Um ano</button>
       </div>
     </header>
-    <ul v-for="(track, index) in this.topTracks" :key="index">
+    <ul v-for="(track, index) in this.topTracks" :key="index" @click="openTrack(track)">
       <li class="track">
         <span>{{ index + 1 }}</span>
         <img class="cover" :src="track.album.images[2].url" alt />
@@ -88,11 +92,14 @@ header.songs-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
 }
 
 ul {
   padding: 0;
+  margin: 0 0 10px 0;
+
   .track {
     max-width: 740px;
     width: 100%;
@@ -106,6 +113,15 @@ ul {
     background: #fff;
     font-weight: 500;
     border-radius: 16px;
+    transition: border-radius 2s, background 0.5s, color 0.5s;
+
+    &:hover {
+      background: #e91e63;
+      color: #fff;
+      cursor: pointer;
+      transition: border-radius 0.5s, background 0.5s, color 0.5s;
+      border-radius: 0;
+    }
 
     span {
       word-wrap: break-word;

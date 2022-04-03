@@ -43,6 +43,9 @@ export default {
       });
       clickEvent.target.classList.add("is-active");
     },
+    openArtist(artist) {
+      window.open(artist.external_urls.spotify);
+    },
   },
   async mounted() {
     await this.getUserTopArtists();
@@ -64,7 +67,7 @@ export default {
         <button class="btn-artists" @click="refreshArtists('long', $event)">Um ano</button>
       </div>
     </header>
-    <ul v-for="(artist, index) in this.topArtists" :key="index">
+    <ul v-for="(artist, index) in this.topArtists" :key="index" @click="openArtist(artist)">
       <li class="artist">
         <span>{{ index + 1 }}</span>
         <img class="cover" :src="artist.images[2].url" alt />
@@ -89,11 +92,14 @@ header.artists-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
 }
 
 ul {
- padding: 0;
+  padding: 0;
+  margin: 0 0 10px 0;
+
   .artist {
     max-width: 740px;
     width: 100%;
@@ -107,6 +113,15 @@ ul {
     background: #fff;
     font-weight: 500;
     border-radius: 16px;
+    transition: border-radius 1s, background 0.5s, color 0.5s;
+
+    &:hover {
+      background: #e91e63;
+      color: #fff;
+      cursor: pointer;
+      transition: border-radius 0.2s, background 0.5s, color 0.5s;
+      border-radius: 0;
+    }
 
     span {
       word-wrap: break-word;
