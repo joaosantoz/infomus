@@ -42,7 +42,7 @@ onMounted(() => {
   requestTokenUrl.value =
     `https://accounts.spotify.com/authorize?client_id=${client_id}` +
     `&response_type=token&redirect_uri=${redirect_uri.value}` +
-    "&scope=user-read-private%20user-read-email%20user-top-read" +
+    "&scope=user-read-private%20user-read-email%20user-top-read%20streaming" +
     "%20user-read-currently-playing%20user-modify-playback-state&show_dialog=false";
 
   if (window.location.hash !== "") getTokenAndAuthUser();

@@ -15,6 +15,7 @@
     "pinia": "^2.0.13",
     "sass": "^1.49.11",
     "vue": "^3.2.31",
+    "vue-plugin-load-script": "^2.1.1",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
