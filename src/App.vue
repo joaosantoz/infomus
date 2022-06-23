@@ -1,5 +1,6 @@
 <template>
   <RouterView />
+  <span class="wip">WORK IN PROGRESS</span>
 </template>
 
 <style>
@@ -11,6 +12,7 @@
 
 body {
   margin: 0;
+  padding: 0;
 }
 
 #app {
@@ -20,13 +22,24 @@ body {
 }
 
 ::-webkit-scrollbar{
-  background-color: white;
-  width: 10px;
+  background-color: black;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: black;
-  border: 2px solid white;
+  background-color: #e91e63;
   border-radius: 50px;
+}
+
+.wip {
+  position: fixed;
+  right: 2%;
+  top: 96%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 3rem;
+  font-style: italic;
+  z-index: 999;
 }
 </style>

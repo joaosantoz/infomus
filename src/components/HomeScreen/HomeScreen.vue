@@ -2,7 +2,7 @@
 import spotifyApi from "../../services/spotify.js";
 import HomeButtons from "../HomeButtons/HomeButtons.vue";
 import { ref } from "vue";
-import { useStatsStore } from "../../stores/index.js";
+import { useStatsStore } from "../../stores";
 import { mapState } from "pinia";
 
 export default {
@@ -58,4 +58,4 @@ export default {
   </div>
 </template>
 
-<style lang="scss">@import "HomeScreen";</style>
+<style lang="scss">@import './HomeScreen.scss'</style>

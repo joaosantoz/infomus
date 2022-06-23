@@ -19,4 +19,4 @@ export default {
   </div>
 </template>
 
-<style lang="scss">@import "ReleasesCover";</style>
+<style lang="scss" scoped>@import "ReleasesCover";</style>

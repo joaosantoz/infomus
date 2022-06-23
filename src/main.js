@@ -8,7 +8,7 @@ import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2'
 const app = createApp(App)
 
 const pinia = createPinia();
-pinia.use(createPersistedStatePlugin());
+pinia.use(createPersistedStatePlugin({ overwrite: true, storage: window.sessionStorage }));
 
 app.use(pinia)
 app.use(router)

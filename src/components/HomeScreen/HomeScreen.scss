@@ -61,7 +61,7 @@
   .home-screen {
     max-height: 100vh;
     overflow: hidden;
-    background: linear-gradient(0deg, black, #191414);
+    background: #060606;
     .img-playback {
       position: absolute;
       left: 50%;
@@ -75,23 +75,7 @@
         width: 600px;
         object-fit: cover;
         opacity: 0;
-        animation: rotateDisc 75s linear infinite, showDisc 5s forwards;
-        border-radius: 50%;
-      }
-      &::after {
-        content: "";
-        position: absolute;
-        height: 74px;
-        width: 74px;
-        background: black;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        box-shadow:
-                inset 0 0 0 4px white,
-                inset 0 0 0 4px black,
-                inset 0 0 0 20px rgba(255, 255, 255, 0.1);
+        animation: showDisc 5s forwards;
       }
     }
   }
@@ -100,15 +84,6 @@
 @media screen and (max-width: 768px) {
   .home-screen {
     height: 100vh;
-  }
-}
-
-@keyframes rotateDisc {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }
 

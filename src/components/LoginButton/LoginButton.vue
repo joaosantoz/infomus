@@ -2,6 +2,7 @@
 import { mapState, mapActions } from "pinia";
 import { useStatsStore } from "../../stores";
 import { ref } from "vue";
+import spotifyApi from "../../services/spotify";
 
 export default {
   setup() {
@@ -21,7 +22,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useStatsStore, ["getUserToken", "getFullUser"]),
+    ...mapState(useStatsStore, ["getUserToken", "getUserName"]),
   },
 
   methods: {
@@ -37,7 +38,13 @@ export default {
     },
 
     authAndGetUser() {
-      this.setNewUser(this.getUserToken);
+      spotifyApi
+        .get("/me", {
+          headers: { Authorization: `Bearer ${this.getUserToken}` },
+        })
+        .then((response) => {
+          this.setNewUser(response.data);
+        });
       this.$router.push("/home");
     },
 
