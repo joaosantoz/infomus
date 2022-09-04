@@ -70,7 +70,7 @@ export default {
     <ul v-for="(track, index) in this.topTracks" :key="index" @click="openTrack(track)">
       <li class="track">
         <span>{{ index + 1 }}</span>
-        <img class="cover" v-bind:src="artist.images[2]?.url ?? '/src/assets/song-placeholder.png'" alt />
+        <img class="cover" v-bind:src="track.album.images[2]?.url ?? '/src/assets/song-placeholder.png'" alt />
         <span>{{ track.name }}</span>
         <span>{{ track.artists[0].name }}</span>
       </li>
