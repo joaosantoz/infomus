@@ -70,7 +70,7 @@ export default {
     <ul v-for="(artist, index) in this.topArtists" :key="index" @click="openArtist(artist)">
       <li class="artist">
         <span>{{ index + 1 }}</span>
-        <img class="cover" :src="artist.images[2].url" alt />
+        <img class="cover" v-bind:src="artist.images[2]?.url ?? '/src/assets/profile-placeholder.png'" alt />
         <span>{{ artist.name }}</span>
       </li>
     </ul>
