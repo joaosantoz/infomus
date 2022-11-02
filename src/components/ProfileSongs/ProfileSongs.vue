@@ -3,6 +3,7 @@ import { mapState } from "pinia";
 import axios from "axios";
 import { useStatsStore } from "../../stores";
 import { ref } from "vue";
+import placeholder from '@/assets/song-placeholder.png'
 
 export default {
   setup() {
@@ -11,6 +12,7 @@ export default {
     return {
       topTracks,
       termRange,
+      placeholder,
     };
   },
   methods: {
@@ -70,7 +72,7 @@ export default {
     <ul v-for="(track, index) in this.topTracks" :key="index" @click="openTrack(track)">
       <li class="track">
         <span>{{ index + 1 }}</span>
-        <img class="cover" v-bind:src="track.album.images[2]?.url ?? '/src/assets/song-placeholder.png'" alt />
+        <img class="cover" v-bind:src="track.album.images[2]?.url ?? placeholder" alt />
         <span>{{ track.name }}</span>
         <span>{{ track.artists[0].name }}</span>
       </li>

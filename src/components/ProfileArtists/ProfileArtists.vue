@@ -3,6 +3,7 @@ import { mapState } from "pinia";
 import { useStatsStore } from "../../stores";
 import { ref } from "vue";
 import axios from "axios";
+import placeholder from '@/assets/profile-placeholder.png';
 
 export default {
   setup() {
@@ -12,6 +13,7 @@ export default {
     return {
       topArtists,
       termRange,
+      placeholder,
     };
   },
   methods: {
@@ -70,7 +72,7 @@ export default {
     <ul v-for="(artist, index) in this.topArtists" :key="index" @click="openArtist(artist)">
       <li class="artist">
         <span>{{ index + 1 }}</span>
-        <img class="cover" v-bind:src="artist.images[2]?.url ?? '/src/assets/profile-placeholder.png'" alt />
+        <img class="cover" :src="artist.images[2]?.url ?? placeholder" alt />
         <span>{{ artist.name }}</span>
       </li>
     </ul>
